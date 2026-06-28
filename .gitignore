@@ -1,0 +1,26 @@
+# Reproduction folder — keep CODE, never commit DATA or generated OUTPUT.
+# (The repo-root .gitignore already excludes these; this is a self-contained copy.)
+
+# Large input data (see DATA.md) — must stay local / on the cluster.
+*.rds
+*.csv
+*.tsv
+*.parquet
+*.zip
+data/
+
+# Generated results (regenerate by running the pipeline).
+outputs/cache/
+outputs/tables/*.csv
+outputs/figures/*
+outputs/sessioninfo.txt
+
+# But DO keep the folder placeholders.
+!outputs/tables/.gitkeep
+!outputs/figures/.gitkeep
+
+# R / system cruft
+.Rhistory
+.RData
+.Rapp.history
+.DS_Store
