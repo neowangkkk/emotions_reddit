@@ -73,35 +73,13 @@ they read/write intermediate `.rds` files under `outputs/` so steps are cached.
   `IMR1` = inverse Mills ratio from the Heckman selection step.
 - All continuous predictors are **standardized (z)** before entering the models.
 
-## 6. Faithfulness, and the paper's own caveats
-
-1. **Unclustered standard errors.** Tables II–V use conventional SEs, but post-level
-   regressors are constant within post (~241 dyads/post). The paper says precision is
-   very likely overstated and that **two-way (post × provider) cluster-robust SEs**
-   are required. `04_…R` includes a ready-to-run clustered-SE block
-   (`sandwich::vcovCL`); it is **off by default** to match the printed tables and can
-   be switched on with `CLUSTER_SE <- TRUE` in `config.R`.
-2. **SSBC merge fan-out.** The score↔dyad join key lacks a thread id and fans
-   197,060 scored dyads out to **199,249** rows (Tables IV–V). `06_…R` and `07_…R`
-   reproduce the number as printed **and** flag the corrected-merge re-estimation as a
-   revision-program TODO.
-3. **Exposure is unobserved** (no impression data); dyad-level effects are
-   intent-to-treat-style over an exposure-uncertain risk set. Risk-set-size controls
-   and calendar-time fixed effects (which discriminate the two-channel reading from a
-   bystander/audience-size reading) are specified but **not yet in the printed models**;
-   `04_…R` marks where they attach.
-4. **H5 is not supported** (null total effect at Baron–Kenny step 1). The script
-   reproduces all four columns of Table V and the step-1 stop.
-
-
-
-## 7. Outputs
+## 6. Outputs
 
 Every script writes a CSV (and, where relevant, a formatted text table) under
 `outputs/tables/`, named for the table it reproduces (`table_I.csv`, …). Figures
 go to `outputs/figures/`. Nothing under `outputs/` except `.gitkeep` is committed.
 
-## 8. Data availability & ethics
+## 7. Data availability & ethics
 
 Public r/Entrepreneur content (2012–2017). Raw text is **not** redistributed
 (Reddit's post-2023 access terms; user emotional disclosures). The committed
@@ -110,7 +88,7 @@ publication per the paper's data-availability statement (§4.6). No usernames ar
 stored in this repo. See `DATA.md` for exactly which files each script needs and
 where they are expected to live.
 
-## 9. File map
+## 8. File map
 
 ```
 reproduction/
@@ -137,7 +115,3 @@ reproduction/
 
 ---
 
-*Prepared as a faithful, documented reproduction of the v5 analysis. It implements the
-published specifications and the paper's stated caveats; it does not invent results.
-Reported values appear as `EXPECTED:` comments for verification when the pipeline is
-run against the data.*
